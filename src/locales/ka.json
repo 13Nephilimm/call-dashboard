@@ -1,0 +1,31 @@
+{
+  "auth": {
+    "login": "შესვლა",
+    "register": "რეგისტრაცია",
+    "email": "ელ-ფოსტა",
+    "password": "პაროლი",
+    "confirmPassword": "გაიმეორეთ პაროლი",
+    "fullName": "სრული სახელი",
+    "forgotPassword": "დაგავიწყდა პაროლი?",
+    "noAccount": "არ გაქვთ ანგარიში?",
+    "hasAccount": "უკვე გაქვთ ანგარიში?",
+    "signUp": "რეგისტრაცია",
+    "signIn": "შესვლა",
+    "welcomeBack": "კეთილი იყოს თქვენი დაბრუნება!",
+    "createAccount": "ანგარიშის შექმნა",
+    "orContinueWith": "ან გააგრძელეთ",
+    "agreeToTerms": "ვეთანხმები მომსახურების პირობებს და კონფიდენციალურობის პოლიტიკას"
+  },
+  "validation": {
+    "required": "ეს ველი სავალდებულოა",
+    "emailInvalid": "გთხოვთ შეიყვანოთ სწორი ელ-ფოსტა",
+    "passwordMin": "პაროლი უნდა შეიცავდეს მინიმუმ 8 სიმბოლოს",
+    "passwordMatch": "პაროლები არ ემთხვევა"
+  },
+  "placeholders": {
+    "enterEmail": "შეიყვანეთ ელ-ფოსტა",
+    "enterPassword": "შეიყვანეთ პაროლი",
+    "enterName": "შეიყვანეთ სრული სახელი",
+    "confirmPassword": "დაადასტურეთ პაროლი"
+  }
+}

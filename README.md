@@ -31,6 +31,35 @@ npm install
 npm run dev
 ```
 
+## Backend (Auth API)
+
+The backend lives in `backend/` and provides:
+
+- `POST /auth/login` (JWT)
+- `GET /auth/me`
+- `POST /admin/users` (admin-only create user)
+- `GET /admin/users` (admin-only list users)
+- `GET /users/me` and `GET /users/me/ratings`
+
+### Seed initial admins
+
+This seeds the first admin user:
+
+- email: `jax@gmail.com`
+- password: `password123`
+
+Add the rest of your admins in `backend/scripts/seed-admins.js` (array at the top), then run:
+
+```sh
+npm run backend:seed:admins
+```
+
+### Run the backend
+
+```sh
+npm run backend:dev
+```
+
 ### Compile and Minify for Production
 
 ```sh
