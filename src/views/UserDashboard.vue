@@ -49,7 +49,7 @@ export default {
     return {
       authState,
       ratings: [],
-      loadingRatings: false
+      loadingRatings: false,
     };
   },
   computed: {
@@ -58,8 +58,8 @@ export default {
     },
     avatarUrl() {
       const gender = this.user?.gender || "male";
-      return gender === "female" ? "/images/avatar-female.png" : "/images/avatar-male.png";
-    }
+      return gender === "female" ? "/images/female.png" : "/images/male.png";
+    },
   },
   async created() {
     this.loadingRatings = true;
@@ -71,7 +71,7 @@ export default {
     } finally {
       this.loadingRatings = false;
     }
-  }
+  },
 };
 </script>
 
@@ -156,4 +156,3 @@ export default {
   gap: 0.5rem;
 }
 </style>
-

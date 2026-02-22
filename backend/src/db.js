@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 
 const connectionString =
-  process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/call_dashboard";
+  process.env.DATABASE_URL || "postgres://postgres:admin@localhost:5432/call_dashboard";
 
 export const pool = new Pool({ connectionString });
 
