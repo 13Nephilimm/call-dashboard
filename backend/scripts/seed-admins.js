@@ -1,33 +1,33 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
 
-import { createUser, findUserByEmail, openDb } from "../src/db.js";
-
-const DATABASE_PATH = process.env.DATABASE_PATH || "./data/db.json";
+import { createUser, findUserByEmail, initDb } from "../src/db.js";
 
 const admins = [
-  { email: "jax@gmail.com", password: "password123", name: "Jax", role: "admin" }
-  // Add the rest of your admins here (email/password/name).
+  { email: "jax@gmail.com", password: "admin", name: "Jax", role: "admin", gender: "male" }
+  // Add the rest of your admins here (email/password/name/gender).
 ];
 
-const db = openDb({ databasePath: DATABASE_PATH });
+await initDb();
 
 let created = 0;
 let skipped = 0;
 
 for (const a of admins) {
-  const found = findUserByEmail(db, a.email);
+  const found = await findUserByEmail(a.email);
   if (found) {
     skipped += 1;
     continue;
   }
 
   const passwordHash = bcrypt.hashSync(a.password, 12);
-  createUser(db, {
+  // eslint-disable-next-line no-await-in-loop
+  await createUser({
     email: a.email,
     passwordHash,
     role: "admin",
-    name: a.name ?? null
+    name: a.name ?? null,
+    gender: a.gender || "male"
   });
   created += 1;
 }

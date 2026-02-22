@@ -9,11 +9,15 @@
 
       <section class="section">
         <h2 class="section-title">Profile</h2>
-        <div class="card">
-          <p><strong>ID:</strong> {{ user?.id }}</p>
-          <p><strong>Email:</strong> {{ user?.email }}</p>
-          <p><strong>Role:</strong> {{ user?.role }}</p>
-          <p><strong>Name:</strong> {{ user?.name || "—" }}</p>
+        <div class="card profile">
+          <img :src="avatarUrl" alt="Avatar" class="avatar" />
+          <div class="profile-text">
+            <p class="profile-name">{{ user?.name || user?.email }}</p>
+            <p class="profile-meta">
+              {{ user?.role }} · {{ user?.gender || "—" }}
+            </p>
+            <p class="profile-id">ID: {{ user?.id }}</p>
+          </div>
         </div>
       </section>
 
@@ -51,6 +55,10 @@ export default {
   computed: {
     user() {
       return this.authState.user;
+    },
+    avatarUrl() {
+      const gender = this.user?.gender || "male";
+      return gender === "female" ? "/images/avatar-female.png" : "/images/avatar-male.png";
     }
   },
   async created() {
@@ -96,6 +104,42 @@ export default {
   border-radius: 12px;
   padding: 1rem 1.25rem;
   border: 1px solid var(--color-border);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.profile-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.profile-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.profile-id {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
 }
 
 .ratings {

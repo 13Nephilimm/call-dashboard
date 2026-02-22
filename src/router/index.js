@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "@/views/LoginView.vue";
 import UserDashboard from "@/views/UserDashboard.vue";
+import AdminLayout from "@/views/AdminLayout.vue";
 import AdminDashboard from "@/views/AdminDashboard.vue";
-import { authState, isAdmin, isAuthenticated } from "@/store/auth";
+import AdminUsers from "@/views/AdminUsers.vue";
+import { isAdmin, isAuthenticated } from "@/store/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +27,24 @@ const router = createRouter({
     },
     {
       path: "/admin",
-      name: "admin",
-      component: AdminDashboard,
-      meta: { requiresAuth: true, requiresAdmin: true }
+      component: AdminLayout,
+      meta: { requiresAuth: true, requiresAdmin: true },
+      children: [
+        {
+          path: "",
+          redirect: { name: "admin-dashboard" }
+        },
+        {
+          path: "dashboard",
+          name: "admin-dashboard",
+          component: AdminDashboard
+        },
+        {
+          path: "users",
+          name: "admin-users",
+          component: AdminUsers
+        }
+      ]
     },
     {
       path: "/:pathMatch(.*)*",

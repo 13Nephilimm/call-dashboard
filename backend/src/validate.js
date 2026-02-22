@@ -23,7 +23,8 @@ export const schemas = {
     email: z.string().email().max(320),
     password: z.string().min(8).max(200),
     role: z.enum(["admin", "user"]).default("user"),
-    name: z.string().trim().min(1).max(120).optional()
+    name: z.string().trim().min(1).max(120).optional(),
+    gender: z.enum(["male", "female"])
   })
 };
 

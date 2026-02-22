@@ -1,70 +1,79 @@
-import path from "node:path";
-import fs from "node:fs";
-import { LowSync } from "lowdb";
-import { JSONFileSync } from "lowdb/node";
+import { Pool } from "pg";
 
-const DEFAULT_DB_PATH = "./data/db.json";
+const connectionString =
+  process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/call_dashboard";
 
-export function openDb({ databasePath } = {}) {
-  const resolvedPath = path.resolve(process.cwd(), databasePath || DEFAULT_DB_PATH);
-  fs.mkdirSync(path.dirname(resolvedPath), { recursive: true });
+export const pool = new Pool({ connectionString });
 
-  const adapter = new JSONFileSync(resolvedPath);
-  const db = new LowSync(adapter, {
-    users: [],
-    ratings: [],
-    meta: { nextUserId: 1, nextRatingId: 1 }
-  });
-  db.read();
-  db.data ||= { users: [], ratings: [], meta: { nextUserId: 1, nextRatingId: 1 } };
-  db.data.users ||= [];
-  db.data.ratings ||= [];
-  db.data.meta ||= { nextUserId: 1, nextRatingId: 1 };
-  db.data.meta.nextUserId ||= 1;
-  db.data.meta.nextRatingId ||= 1;
-  db.write();
-  return db;
+export async function initDb() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      role TEXT NOT NULL CHECK (role IN ('admin','user')),
+      name TEXT,
+      gender TEXT NOT NULL DEFAULT 'male' CHECK (gender IN ('male','female')),
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+
+    CREATE TABLE IF NOT EXISTS ratings (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      score INTEGER NOT NULL CHECK (score >= 1 AND score <= 5),
+      note TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_ratings_user_id ON ratings(user_id);
+  `);
 }
 
-export function nowIso() {
-  return new Date().toISOString();
+export async function findUserByEmail(email) {
+  const { rows } = await pool.query(
+    "SELECT id, email, password_hash, role, name, gender, created_at FROM users WHERE LOWER(email) = LOWER($1)",
+    [email]
+  );
+  return rows[0] || null;
 }
 
-export function findUserByEmail(db, email) {
-  db.read();
-  return db.data.users.find((u) => u.email.toLowerCase() === String(email).toLowerCase()) || null;
+export async function findUserById(id) {
+  const { rows } = await pool.query(
+    "SELECT id, email, password_hash, role, name, gender, created_at FROM users WHERE id = $1",
+    [id]
+  );
+  return rows[0] || null;
 }
 
-export function findUserById(db, id) {
-  db.read();
-  return db.data.users.find((u) => u.id === id) || null;
+export async function listUsers() {
+  const { rows } = await pool.query(
+    "SELECT id, email, role, name, gender, created_at FROM users ORDER BY id ASC"
+  );
+  return rows;
 }
 
-export function listUsers(db) {
-  db.read();
-  return [...db.data.users].sort((a, b) => a.id - b.id);
+export async function createUser({ email, passwordHash, role, name, gender }) {
+  const { rows } = await pool.query(
+    `
+      INSERT INTO users (email, password_hash, role, name, gender)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id, email, role, name, gender, created_at
+    `,
+    [email, passwordHash, role, name ?? null, gender]
+  );
+  return rows[0];
 }
 
-export function createUser(db, { email, passwordHash, role, name }) {
-  db.read();
-  const user = {
-    id: db.data.meta.nextUserId++,
-    email,
-    password_hash: passwordHash,
-    role,
-    name: name ?? null,
-    created_at: nowIso()
-  };
-  db.data.users.push(user);
-  db.write();
-  return user;
-}
-
-export function listRatingsForUser(db, userId) {
-  db.read();
-  return db.data.ratings
-    .filter((r) => r.user_id === userId)
-    .sort((a, b) => (a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : b.id - a.id))
-    .map(({ id, score, note, created_at }) => ({ id, score, note, created_at }));
+export async function listRatingsForUser(userId) {
+  const { rows } = await pool.query(
+    `
+      SELECT id, score, note, created_at
+      FROM ratings
+      WHERE user_id = $1
+      ORDER BY created_at DESC, id DESC
+    `,
+    [userId]
+  );
+  return rows;
 }
 

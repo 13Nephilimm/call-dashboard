@@ -11,18 +11,15 @@ import {
   findUserById,
   listRatingsForUser,
   listUsers,
-  openDb
+  initDb
 } from "./db.js";
 import { authRequired, requireRole, signAccessToken } from "./auth.js";
 import { schemas, validateBody } from "./validate.js";
 
 const PORT = Number(process.env.PORT || 3001);
-const DATABASE_PATH = process.env.DATABASE_PATH || "./data/db.json";
 const JWT_SECRET = process.env.JWT_SECRET || "dev_secret_change_me";
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:5173";
-
-const db = openDb({ databasePath: DATABASE_PATH });
 
 const app = express();
 
@@ -38,9 +35,9 @@ app.use(morgan("dev"));
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
-app.post("/auth/login", validateBody(schemas.login), (req, res) => {
+app.post("/auth/login", validateBody(schemas.login), async (req, res) => {
   const { email, password } = req.body;
-  const user = findUserByEmail(db, email);
+  const user = await findUserByEmail(email);
 
   if (!user) return res.status(401).json({ error: "invalid_credentials" });
   const ok = bcrypt.compareSync(password, user.password_hash);
@@ -54,26 +51,32 @@ app.post("/auth/login", validateBody(schemas.login), (req, res) => {
 
   return res.json({
     token,
-    user: { id: user.id, email: user.email, role: user.role, name: user.name ?? null }
+    user: {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name ?? null,
+      gender: user.gender
+    }
   });
 });
 
-app.get("/auth/me", authRequired({ jwtSecret: JWT_SECRET }), (req, res) => {
-  const user = findUserById(db, req.user.id);
+app.get("/auth/me", authRequired({ jwtSecret: JWT_SECRET }), async (req, res) => {
+  const user = await findUserById(req.user.id);
   if (!user) return res.status(404).json({ error: "not_found" });
   const { password_hash, ...safe } = user;
   return res.json({ user: safe });
 });
 
-app.get("/users/me", authRequired({ jwtSecret: JWT_SECRET }), (req, res) => {
-  const user = findUserById(db, req.user.id);
+app.get("/users/me", authRequired({ jwtSecret: JWT_SECRET }), async (req, res) => {
+  const user = await findUserById(req.user.id);
   if (!user) return res.status(404).json({ error: "not_found" });
   const { password_hash, ...safe } = user;
   return res.json({ user: safe });
 });
 
-app.get("/users/me/ratings", authRequired({ jwtSecret: JWT_SECRET }), (req, res) => {
-  const ratings = listRatingsForUser(db, req.user.id);
+app.get("/users/me/ratings", authRequired({ jwtSecret: JWT_SECRET }), async (req, res) => {
+  const ratings = await listRatingsForUser(req.user.id);
   return res.json({ ratings });
 });
 
@@ -82,16 +85,15 @@ app.post(
   authRequired({ jwtSecret: JWT_SECRET }),
   requireRole("admin"),
   validateBody(schemas.adminCreateUser),
-  (req, res) => {
-    const { email, password, role, name } = req.body;
+  async (req, res) => {
+    const { email, password, role, name, gender } = req.body;
 
-    const existing = findUserByEmail(db, email);
+    const existing = await findUserByEmail(email);
     if (existing) return res.status(409).json({ error: "email_already_exists" });
 
     const passwordHash = bcrypt.hashSync(password, 12);
-    const created = createUser(db, { email, passwordHash, role, name });
-    const { password_hash, ...safe } = created;
-    return res.status(201).json({ user: safe });
+    const created = await createUser({ email, passwordHash, role, name, gender });
+    return res.status(201).json({ user: created });
   }
 );
 
@@ -99,8 +101,8 @@ app.get(
   "/admin/users",
   authRequired({ jwtSecret: JWT_SECRET }),
   requireRole("admin"),
-  (req, res) => {
-    const users = listUsers(db).map(({ password_hash, ...safe }) => safe);
+  async (req, res) => {
+    const users = await listUsers();
     return res.json({ users });
   }
 );
@@ -109,16 +111,18 @@ app.get(
   "/admin/users/:id/ratings",
   authRequired({ jwtSecret: JWT_SECRET }),
   requireRole("admin"),
-  (req, res) => {
+  async (req, res) => {
     const userId = Number(req.params.id);
     if (!Number.isFinite(userId)) return res.status(400).json({ error: "invalid_user_id" });
 
-    const ratings = listRatingsForUser(db, userId);
+    const ratings = await listRatingsForUser(userId);
     return res.json({ ratings });
   }
 );
 
 app.use((req, res) => res.status(404).json({ error: "not_found" }));
+
+await initDb();
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

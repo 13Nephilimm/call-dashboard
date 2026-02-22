@@ -31,7 +31,7 @@
       <div class="divider"></div>
 
       <div class="social-login">
-        <img src="/public/images/logo.png" alt="logo" class="logo" />
+        <img src="/images/logo.png" alt="logo" class="logo" />
       </div>
     </div>
   </AuthCard>
@@ -67,7 +67,7 @@ export default {
         const res = await login(this.form.email, this.form.password);
         setAuth({ token: res.token, user: res.user });
         if (isAdmin()) {
-          this.$router.push({ name: "admin" });
+          this.$router.push({ name: "admin-dashboard" });
         } else {
           this.$router.push({ name: "dashboard" });
         }
