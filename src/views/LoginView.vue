@@ -101,7 +101,7 @@ export default {
   font-weight: 700;
   background: linear-gradient(
     135deg,
-    var(--color-white) 0%,
+    var(--gradient-title-start) 0%,
     var(--color-primary) 100%
   );
   -webkit-background-clip: text;
@@ -208,7 +208,7 @@ export default {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   font-size: 1.2rem;

@@ -2,6 +2,7 @@
   <div class="app">
     <div class="top-bar">
       <LanguageSwitcher />
+      <ThemeToggle />
       <button
         v-if="isAuthenticated"
         class="logout-btn"
@@ -24,12 +25,14 @@
 
 <script>
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
+import ThemeToggle from "@/components/ThemeToggle.vue";
 import { authState, clearAuth, isAuthenticated } from "@/store/auth";
 
 export default {
   name: "App",
   components: {
     LanguageSwitcher,
+    ThemeToggle,
   },
   computed: {
     isAuthenticated() {

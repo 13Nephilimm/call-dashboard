@@ -267,7 +267,7 @@ export default {
           team: "Customer Support",
           shift: "Morning",
           rating: 4.9,
-          avatar: "/images/female.png",
+          avatar: "/images/user.png",
         },
         {
           id: 2,
@@ -275,7 +275,7 @@ export default {
           team: "Technical Support",
           shift: "Evening",
           rating: 4.8,
-          avatar: "/images/male.png",
+          avatar: "/images/user.png",
         },
         {
           id: 3,
@@ -283,7 +283,7 @@ export default {
           team: "Sales",
           shift: "Morning",
           rating: 4.8,
-          avatar: "/images/female.png",
+          avatar: "/images/user.png",
         },
         {
           id: 4,
@@ -291,7 +291,7 @@ export default {
           team: "Customer Support",
           shift: "Night",
           rating: 4.7,
-          avatar: "/images/male.png",
+          avatar: "/images/user.png",
         },
       ],
       distribution: [
@@ -326,7 +326,7 @@ export default {
   margin: 0 0 0.25rem;
   background: linear-gradient(
     135deg,
-    var(--color-white) 0%,
+    var(--gradient-title-start) 0%,
     var(--color-primary) 100%
   );
   -webkit-background-clip: text;
@@ -342,7 +342,7 @@ export default {
   display: flex;
   gap: 0.5rem;
   padding: 0.25rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   border-radius: 30px;
 }
 
@@ -374,7 +374,7 @@ export default {
 }
 
 .kpi-card {
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 20px;
@@ -389,7 +389,7 @@ export default {
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 25px -5px var(--color-shadow);
 }
 
 .kpi-icon {
@@ -446,7 +446,7 @@ export default {
 
 /* Cards */
 .card {
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 20px;
@@ -486,7 +486,7 @@ export default {
 }
 
 .card-select {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-input-bg);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
   padding: 0.4rem 1rem;
@@ -512,7 +512,7 @@ export default {
 }
 
 .operator-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
 }
 
 .operator-info {
@@ -550,7 +550,7 @@ export default {
 }
 
 .star {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--color-star-empty);
 }
 
 .star.filled {
@@ -588,7 +588,7 @@ export default {
 
 .distribution-bar-container {
   height: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-progress-bg);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -637,7 +637,7 @@ export default {
 .team-item {
   padding: 0.75rem;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-surface-inset);
 }
 
 .team-info {
@@ -708,7 +708,7 @@ export default {
 }
 
 .activity-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
 }
 
 .activity-avatar img {
@@ -765,7 +765,7 @@ export default {
 }
 
 .quality-card {
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 20px;
@@ -791,7 +791,7 @@ export default {
 
 .progress-bar {
   height: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-progress-bg);
   border-radius: 20px;
   margin-bottom: 0.75rem;
   overflow: hidden;

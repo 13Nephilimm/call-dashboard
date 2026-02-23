@@ -137,8 +137,7 @@ export default {
       return this.authState.user;
     },
     avatarUrl() {
-      const gender = this.user?.gender || "male";
-      return gender === "female" ? "/images/female.png" : "/images/male.png";
+      return "/images/user.png";
     },
   },
   methods: {
@@ -164,7 +163,7 @@ export default {
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width, 260px);
-  background: rgba(6, 39, 51, 0.95);
+  background: var(--color-surface-solid);
   backdrop-filter: blur(10px);
   border-right: 1px solid var(--color-border);
   display: flex;
@@ -241,7 +240,7 @@ export default {
 }
 
 .nav-link:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   color: var(--color-text-primary);
 }
 
@@ -256,7 +255,7 @@ export default {
 
 .nav-badge {
   margin-left: auto;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
   padding: 0.2rem 0.5rem;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -315,7 +314,7 @@ export default {
 /* Top Bar */
 .top-bar {
   height: 70px;
-  background: rgba(6, 39, 51, 0.8);
+  background: var(--color-surface-topbar);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border);
   display: flex;
@@ -338,7 +337,7 @@ export default {
 }
 
 .menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   color: var(--color-text-primary);
 }
 
@@ -365,7 +364,7 @@ export default {
 .search-input {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-input-bg);
   border: 1px solid var(--color-border);
   border-radius: 30px;
   color: var(--color-text-primary);
@@ -375,7 +374,7 @@ export default {
 .search-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-input-bg-focus);
 }
 
 .notification-btn {
@@ -389,7 +388,7 @@ export default {
 }
 
 .notification-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   color: var(--color-text-primary);
 }
 

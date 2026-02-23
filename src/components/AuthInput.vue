@@ -71,7 +71,7 @@ export default {
 .auth-input {
   width: 100%;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-input-bg);
   border: 2px solid var(--color-border);
   border-radius: 12px;
   color: var(--color-text-primary);
@@ -82,7 +82,7 @@ export default {
 .auth-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-input-bg-focus);
   box-shadow: 0 0 0 4px rgba(28, 175, 75, 0.1);
 }
 

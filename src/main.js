@@ -9,6 +9,7 @@ import ka from "./locales/ka.json";
 import { setAuth, clearAuth } from "./store/auth";
 import { setAccessToken } from "./services/api";
 import { fetchMe } from "./services/api";
+import { initTheme } from "./store/theme";
 
 // Reactive i18n - locale changes trigger re-renders
 const savedLocale = localStorage.getItem("locale") || "en";
@@ -52,6 +53,7 @@ if (storedAuth) {
   }
 }
 
+initTheme();
 app.use(router);
 app.mount("#app");
 

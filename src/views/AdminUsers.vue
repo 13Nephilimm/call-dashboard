@@ -471,11 +471,7 @@
           <div v-for="user in sortedUsers" :key="user.id" class="user-card">
             <div class="user-card-header">
               <img
-                :src="
-                  user.gender === 'female'
-                    ? '/images/female.png'
-                    : '/images/male.png'
-                "
+                src="/images/user.png"
                 :alt="user.name"
                 class="user-avatar"
               />
@@ -798,7 +794,7 @@ export default {
   margin: 0 0 0.25rem;
   background: linear-gradient(
     135deg,
-    var(--color-white) 0%,
+    var(--gradient-title-start) 0%,
     var(--color-primary) 100%
   );
   -webkit-background-clip: text;
@@ -814,7 +810,7 @@ export default {
 .quick-stats {
   display: flex;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   padding: 0.25rem;
   border-radius: 30px;
   border: 1px solid var(--color-border);
@@ -841,13 +837,13 @@ export default {
 
 /* Create User Card */
 .create-card {
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 24px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 25px -5px var(--color-shadow);
 }
 
 .create-header {
@@ -906,7 +902,7 @@ export default {
 
 .field-input {
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-input-bg);
   border: 1px solid var(--color-border);
   border-radius: 12px;
   color: var(--color-text-primary);
@@ -917,7 +913,7 @@ export default {
 .field-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-input-bg-focus);
   box-shadow: 0 0 0 3px rgba(28, 175, 75, 0.1);
 }
 
@@ -928,7 +924,7 @@ export default {
 .radio-group {
   display: flex;
   gap: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   padding: 0.5rem;
   border-radius: 30px;
 }
@@ -999,13 +995,13 @@ export default {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   color: var(--color-text-secondary);
   border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
   color: var(--color-text-primary);
 }
 
@@ -1056,7 +1052,7 @@ export default {
 .search-input {
   width: 100%;
   padding: 0.75rem 1rem 0.75rem 2.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-input-bg);
   border: 1px solid var(--color-border);
   border-radius: 30px;
   color: var(--color-text-primary);
@@ -1067,7 +1063,7 @@ export default {
 .search-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-input-bg-focus);
 }
 
 .search-clear {
@@ -1085,7 +1081,7 @@ export default {
 
 .search-clear:hover {
   color: var(--color-text-primary);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
 }
 
 .filter-group {
@@ -1104,7 +1100,7 @@ export default {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   border: 1px solid var(--color-border);
   border-radius: 30px;
   color: var(--color-text-secondary);
@@ -1113,7 +1109,7 @@ export default {
 }
 
 .filter-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
   color: var(--color-text-primary);
 }
 
@@ -1144,7 +1140,7 @@ export default {
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 0.5rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px -5px var(--color-shadow);
   z-index: 10;
 }
 
@@ -1159,7 +1155,7 @@ export default {
 }
 
 .filter-option:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
 }
 
 .filter-option input[type="checkbox"] {
@@ -1200,7 +1196,7 @@ export default {
 }
 
 .rating-star {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--color-star-empty);
   font-size: 1.2rem;
 }
 
@@ -1218,7 +1214,7 @@ export default {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   color: var(--color-text-secondary);
@@ -1227,7 +1223,7 @@ export default {
 }
 
 .filter-clear:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
   color: var(--color-text-primary);
 }
 
@@ -1257,7 +1253,7 @@ export default {
 
 /* Users Section */
 .users-section {
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 24px;
@@ -1280,7 +1276,7 @@ export default {
 }
 
 .users-count {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-active);
   padding: 0.2rem 0.6rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -1289,14 +1285,14 @@ export default {
 
 .sort-select {
   padding: 0.5rem 2rem 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background-color: var(--color-input-bg);
   border: 1px solid var(--color-border);
   border-radius: 30px;
   color: var(--color-text-primary);
   font-size: 0.9rem;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
 }
@@ -1318,7 +1314,7 @@ export default {
 }
 
 .user-card {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-surface-dark);
   border: 1px solid var(--color-border);
   border-radius: 16px;
   overflow: hidden;
@@ -1328,7 +1324,7 @@ export default {
 .user-card:hover {
   transform: translateY(-4px);
   border-color: var(--color-primary);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 25px -5px var(--color-shadow);
 }
 
 .user-card-header {
@@ -1419,7 +1415,7 @@ export default {
 }
 
 .star {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--color-star-empty);
   font-size: 1rem;
 }
 
@@ -1437,7 +1433,7 @@ export default {
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   border-radius: 12px;
 }
 
@@ -1464,7 +1460,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-surface-dark);
   border-top: 1px solid var(--color-border);
 }
 

@@ -25,10 +25,10 @@ export default {
   margin: 0 auto;
   overflow: hidden;
   border-radius: 32px;
-  background: rgba(6, 39, 51, 0.7);
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px var(--color-shadow);
   margin-top: 48px;
 }
 

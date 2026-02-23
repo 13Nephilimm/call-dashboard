@@ -35,7 +35,7 @@ export default {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface-hover);
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 2rem;

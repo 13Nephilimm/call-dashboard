@@ -57,8 +57,7 @@ export default {
       return this.authState.user;
     },
     avatarUrl() {
-      const gender = this.user?.gender || "male";
-      return gender === "female" ? "/images/female.png" : "/images/male.png";
+      return "/images/user.png";
     },
   },
   async created() {
@@ -100,7 +99,7 @@ export default {
 }
 
 .card {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--color-surface-dark);
   border-radius: 12px;
   padding: 1rem 1.25rem;
   border: 1px solid var(--color-border);
