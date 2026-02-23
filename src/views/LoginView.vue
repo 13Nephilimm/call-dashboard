@@ -23,8 +23,9 @@
           v-model="form.password"
         />
 
-        <button type="submit" class="submit-btn">
-          {{ $t("auth.login") }}
+        <p v-if="error" class="error-text">{{ error }}</p>
+        <button type="submit" class="submit-btn" :disabled="loading">
+          {{ loading ? "…" : $t("auth.login") }}
         </button>
       </form>
 
@@ -73,9 +74,9 @@ export default {
         }
       } catch (err) {
         if (err.status === 401) {
-          this.error = "Invalid email or password.";
+          this.error = this.$t("auth.invalidCredentials");
         } else {
-          this.error = "Login failed. Please try again.";
+          this.error = this.$t("auth.loginFailed");
         }
       } finally {
         this.loading = false;

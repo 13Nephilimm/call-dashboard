@@ -23,19 +23,14 @@ export default {
   name: "LanguageSwitcher",
   methods: {
     switchLanguage(lang) {
-      this.$i18n.locale = lang;
-      // Force update to trigger re-render with new translations
-      this.$forceUpdate();
-    },
-  },
+      this.$setLocale(lang);
+    }
+  }
 };
 </script>
 
 <style scoped>
 .language-switcher {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -44,7 +39,7 @@ export default {
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border);
   border-radius: 2rem;
-  z-index: 10;
+  z-index: 100;
 }
 
 .lang-btn {
@@ -74,8 +69,6 @@ export default {
 
 @media (max-width: 768px) {
   .language-switcher {
-    top: 1rem;
-    right: 1rem;
     padding: 0.4rem 0.8rem;
   }
 

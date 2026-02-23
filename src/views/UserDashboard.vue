@@ -1,14 +1,14 @@
 <template>
   <AuthCard>
     <div class="dashboard">
-      <h1 class="title">User Dashboard</h1>
+      <h1 class="title">{{ $t("dashboard.userTitle") }}</h1>
       <p class="subtitle">
-        Logged in as <strong>{{ user?.email }}</strong>
+        {{ $t("dashboard.loggedInAs") }} <strong>{{ user?.email }}</strong>
         <span v-if="user?.role">({{ user.role }})</span>
       </p>
 
       <section class="section">
-        <h2 class="section-title">Profile</h2>
+        <h2 class="section-title">{{ $t("dashboard.profile") }}</h2>
         <div class="card profile">
           <img :src="avatarUrl" alt="Avatar" class="avatar" />
           <div class="profile-text">
@@ -22,14 +22,14 @@
       </section>
 
       <section class="section">
-        <h2 class="section-title">My Ratings</h2>
-        <div v-if="loadingRatings" class="card">Loading ratings…</div>
-        <div v-else-if="ratings.length === 0" class="card">No ratings yet.</div>
+        <h2 class="section-title">{{ $t("dashboard.myRatings") }}</h2>
+        <div v-if="loadingRatings" class="card">{{ $t("dashboard.loadingRatings") }}</div>
+        <div v-else-if="ratings.length === 0" class="card">{{ $t("dashboard.noRatings") }}</div>
         <ul v-else class="ratings">
           <li v-for="r in ratings" :key="r.id" class="card rating-item">
-            <div><strong>Score:</strong> {{ r.score }}</div>
-            <div><strong>Note:</strong> {{ r.note || "—" }}</div>
-            <div><strong>Created:</strong> {{ r.created_at }}</div>
+            <div><strong>{{ $t("dashboard.score") }}:</strong> {{ r.score }}</div>
+            <div><strong>{{ $t("dashboard.note") }}:</strong> {{ r.note || "—" }}</div>
+            <div><strong>{{ $t("dashboard.created") }}:</strong> {{ r.created_at }}</div>
           </li>
         </ul>
       </section>

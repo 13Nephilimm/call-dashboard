@@ -3,16 +3,16 @@
     <!-- Header -->
     <div class="dashboard-header">
       <div>
-        <h1 class="page-title">Operator Performance Dashboard</h1>
+        <h1 class="page-title">{{ $t("admin.operatorPerformance") }}</h1>
         <p class="page-subtitle">
-          Real-time metrics and quality analysis for call center operators
+          {{ $t("admin.operatorPerformanceSubtitle") }}
         </p>
       </div>
 
       <div class="date-range">
-        <button class="date-range-btn active">Today</button>
-        <button class="date-range-btn">Week</button>
-        <button class="date-range-btn">Month</button>
+        <button class="date-range-btn active">{{ $t("admin.today") }}</button>
+        <button class="date-range-btn">{{ $t("admin.week") }}</button>
+        <button class="date-range-btn">{{ $t("admin.month") }}</button>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
           </svg>
         </div>
         <div class="kpi-content">
-          <span class="kpi-label">Active Operators</span>
+          <span class="kpi-label">{{ $t("admin.activeOperators") }}</span>
           <span class="kpi-value">24</span>
           <span class="kpi-trend positive">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -51,7 +51,7 @@
                 stroke-linecap="round"
               />
             </svg>
-            +3 today
+            {{ $t("admin.plusToday") }}
           </span>
         </div>
       </div>
@@ -69,7 +69,7 @@
           </svg>
         </div>
         <div class="kpi-content">
-          <span class="kpi-label">Avg Rating</span>
+          <span class="kpi-label">{{ $t("admin.avgRating") }}</span>
           <span class="kpi-value">4.8</span>
           <span class="kpi-trend positive">/5.0</span>
         </div>
@@ -88,9 +88,9 @@
           </svg>
         </div>
         <div class="kpi-content">
-          <span class="kpi-label">Total Operators</span>
+          <span class="kpi-label">{{ $t("admin.totalOperators") }}</span>
           <span class="kpi-value">128</span>
-          <span class="kpi-trend">+12 this month</span>
+          <span class="kpi-trend">{{ $t("admin.plusThisMonth") }}</span>
         </div>
       </div>
 
@@ -107,9 +107,9 @@
           </svg>
         </div>
         <div class="kpi-content">
-          <span class="kpi-label">Pending Reviews</span>
+          <span class="kpi-label">{{ $t("admin.pendingReviews") }}</span>
           <span class="kpi-value">43</span>
-          <span class="kpi-trend warning">Needs attention</span>
+          <span class="kpi-trend warning">{{ $t("admin.needsAttention") }}</span>
         </div>
       </div>
     </div>
@@ -119,8 +119,8 @@
       <!-- Top Rated Operators -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Top Rated Operators</h3>
-          <button class="card-action">View All</button>
+          <h3 class="card-title">{{ $t("admin.topRatedOperators") }}</h3>
+          <button class="card-action">{{ $t("admin.viewAll") }}</button>
         </div>
 
         <div class="operator-list">
@@ -161,8 +161,8 @@
       <!-- Rating Distribution -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Rating Distribution</h3>
-          <span class="card-subtitle">Last 30 days</span>
+          <h3 class="card-title">{{ $t("admin.ratingDistribution") }}</h3>
+          <span class="card-subtitle">{{ $t("admin.last30Days") }}</span>
         </div>
 
         <div class="distribution-bars">
@@ -184,11 +184,11 @@
 
         <div class="distribution-stats">
           <div class="stat">
-            <span class="stat-label">Average</span>
+            <span class="stat-label">{{ $t("admin.average") }}</span>
             <span class="stat-value">4.8</span>
           </div>
           <div class="stat">
-            <span class="stat-label">Total Reviews</span>
+            <span class="stat-label">{{ $t("admin.totalReviews") }}</span>
             <span class="stat-value">1,284</span>
           </div>
         </div>
@@ -197,57 +197,57 @@
 
     <!-- Quality Metrics -->
     <div class="quality-section">
-      <h3 class="section-title">Quality Metrics</h3>
+      <h3 class="section-title">{{ $t("admin.qualityMetrics") }}</h3>
       <div class="quality-grid">
         <div class="quality-card">
           <div class="quality-header">
-            <span class="quality-label">Call Quality</span>
+            <span class="quality-label">{{ $t("admin.callQuality") }}</span>
             <span class="quality-score">94%</span>
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 94%"></div>
           </div>
           <div class="quality-footer">
-            <span class="quality-change positive">+2.3% vs last week</span>
+            <span class="quality-change positive">{{ $t("admin.vsLastWeek") }}</span>
           </div>
         </div>
 
         <div class="quality-card">
           <div class="quality-header">
-            <span class="quality-label">Resolution Rate</span>
+            <span class="quality-label">{{ $t("admin.resolutionRate") }}</span>
             <span class="quality-score">88%</span>
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 88%"></div>
           </div>
           <div class="quality-footer">
-            <span class="quality-change positive">+1.2% vs last week</span>
+            <span class="quality-change positive">{{ $t("admin.vsLastWeekSmall") }}</span>
           </div>
         </div>
 
         <div class="quality-card">
           <div class="quality-header">
-            <span class="quality-label">Avg Response Time</span>
+            <span class="quality-label">{{ $t("admin.avgResponseTime") }}</span>
             <span class="quality-score">2.4m</span>
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 76%"></div>
           </div>
           <div class="quality-footer">
-            <span class="quality-change negative">+0.3m vs target</span>
+            <span class="quality-change negative">{{ $t("admin.vsTarget") }}</span>
           </div>
         </div>
 
         <div class="quality-card">
           <div class="quality-header">
-            <span class="quality-label">Customer Satisfaction</span>
+            <span class="quality-label">{{ $t("admin.customerSatisfaction") }}</span>
             <span class="quality-score">4.7</span>
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 94%"></div>
           </div>
           <div class="quality-footer">
-            <span class="quality-change positive">Above target</span>
+            <span class="quality-change positive">{{ $t("admin.aboveTarget") }}</span>
           </div>
         </div>
       </div>

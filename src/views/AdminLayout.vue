@@ -37,7 +37,7 @@
               stroke-width="1.5"
             />
           </svg>
-          <span>Overview</span>
+          <span>{{ $t("nav.overview") }}</span>
         </router-link>
 
         <router-link
@@ -64,7 +64,7 @@
               stroke-linecap="round"
             />
           </svg>
-          <span>Operators</span>
+          <span>{{ $t("nav.operators") }}</span>
           <span class="nav-badge">24</span>
         </router-link>
 
@@ -82,7 +82,7 @@
               stroke-width="1.5"
             />
           </svg>
-          <span>Ratings</span>
+          <span>{{ $t("nav.ratings") }}</span>
         </router-link>
       </nav>
 
@@ -111,55 +111,6 @@
             />
           </svg>
         </button>
-
-        <div class="top-bar-actions">
-          <div class="search">
-            <svg
-              class="search-icon"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <circle
-                cx="9"
-                cy="9"
-                r="5"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <path
-                d="M13 13L17 17"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search operators, ratings..."
-              class="search-input"
-            />
-          </div>
-
-          <button class="notification-btn">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M4 14L5.57426 7.58433C6.0624 5.4228 7.99187 4 10 4C12.0081 4 13.9376 5.4228 14.4257 7.58433L16 14H4Z"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-              <circle
-                cx="10"
-                cy="17"
-                r="1.5"
-                stroke="currentColor"
-                stroke-width="1.5"
-              />
-            </svg>
-            <span class="notification-badge">3</span>
-          </button>
-        </div>
       </header>
 
       <!-- Page Content -->

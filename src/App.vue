@@ -1,6 +1,15 @@
 <template>
   <div class="app">
-    <LanguageSwitcher />
+    <div class="top-bar">
+      <LanguageSwitcher />
+      <button
+        v-if="isAuthenticated"
+        class="logout-btn"
+        @click="handleLogout"
+      >
+        {{ $t("auth.logout") }}
+      </button>
+    </div>
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
         <component :is="Component" />
@@ -15,16 +24,66 @@
 
 <script>
 import LanguageSwitcher from "@/components/LanguageSwitcher.vue";
+import { authState, clearAuth, isAuthenticated } from "@/store/auth";
 
 export default {
   name: "App",
   components: {
     LanguageSwitcher,
   },
+  computed: {
+    isAuthenticated() {
+      return isAuthenticated();
+    },
+  },
+  setup() {
+    return { authState };
+  },
+  methods: {
+    handleLogout() {
+      clearAuth();
+      this.$router.push({ name: "login" });
+    },
+  },
 };
 </script>
 
 <style scoped>
+.top-bar {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 100;
+}
+
+.logout-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    top: 1rem;
+    right: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
 .app {
   width: 100%;
   min-height: 100vh;

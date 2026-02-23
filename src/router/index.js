@@ -11,7 +11,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/login"
+      redirect: () => (isAuthenticated() ? (isAdmin() ? "/admin/dashboard" : "/dashboard") : "/login")
     },
     {
       path: "/login",

@@ -3,24 +3,24 @@
     <!-- Header -->
     <div class="dashboard-header">
       <div>
-        <h2 class="page-title">User Management</h2>
+        <h2 class="page-title">{{ $t("users.userManagement") }}</h2>
         <p class="page-subtitle">
-          Create, manage, and monitor all operator accounts
+          {{ $t("users.userManagementSubtitle") }}
         </p>
       </div>
 
       <!-- Quick Stats -->
       <div class="quick-stats">
         <div class="stat-pill">
-          <span class="stat-label">Total</span>
+          <span class="stat-label">{{ $t("users.total") }}</span>
           <span class="stat-value">{{ filteredUsers.length }}</span>
         </div>
         <div class="stat-pill">
-          <span class="stat-label">Admins</span>
+          <span class="stat-label">{{ $t("users.admins") }}</span>
           <span class="stat-value">{{ usersByRole.admin }}</span>
         </div>
         <div class="stat-pill">
-          <span class="stat-label">Operators</span>
+          <span class="stat-label">{{ $t("users.operators") }}</span>
           <span class="stat-value">{{ usersByRole.user }}</span>
         </div>
       </div>
@@ -38,9 +38,9 @@
               stroke-linecap="round"
             />
           </svg>
-          Create New Operator
+          {{ $t("users.createNewOperator") }}
         </h3>
-        <span class="create-badge">Admin Only</span>
+        <span class="create-badge">{{ $t("users.adminOnly") }}</span>
       </div>
 
       <form class="create-form" @submit.prevent="handleCreateUser">
@@ -55,7 +55,7 @@
                   stroke-width="1.2"
                 />
               </svg>
-              Email Address
+              {{ $t("users.emailAddress") }}
             </label>
             <input
               type="email"
@@ -76,7 +76,7 @@
                   stroke-width="1.2"
                 />
               </svg>
-              Password
+              {{ $t("auth.password") }}
             </label>
             <input
               type="password"
@@ -103,7 +103,7 @@
                   stroke-linecap="round"
                 />
               </svg>
-              Full Name
+              {{ $t("auth.fullName") }}
             </label>
             <input
               type="text"
@@ -123,16 +123,16 @@
                   stroke-width="1.2"
                 />
               </svg>
-              Role
+              {{ $t("users.role") }}
             </label>
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" value="user" v-model="newUser.role" />
-                <span class="radio-label">Operator</span>
+                <span class="radio-label">{{ $t("users.operator") }}</span>
               </label>
               <label class="radio-option">
                 <input type="radio" value="admin" v-model="newUser.role" />
-                <span class="radio-label">Admin</span>
+                <span class="radio-label">{{ $t("users.admin") }}</span>
               </label>
             </div>
           </div>
@@ -155,16 +155,16 @@
                   stroke-linecap="round"
                 />
               </svg>
-              Gender
+              {{ $t("users.gender") }}
             </label>
             <div class="radio-group">
               <label class="radio-option">
                 <input type="radio" value="male" v-model="newUser.gender" />
-                <span class="radio-label">Male</span>
+                <span class="radio-label">{{ $t("users.male") }}</span>
               </label>
               <label class="radio-option">
                 <input type="radio" value="female" v-model="newUser.gender" />
-                <span class="radio-label">Female</span>
+                <span class="radio-label">{{ $t("users.female") }}</span>
               </label>
             </div>
           </div>
@@ -173,7 +173,7 @@
         <!-- Form Actions -->
         <div class="form-actions">
           <button type="button" class="btn-secondary" @click="resetCreateForm">
-            Clear
+            {{ $t("users.clear") }}
           </button>
           <button type="submit" class="btn-primary" :disabled="creatingUser">
             <svg
@@ -193,7 +193,7 @@
                 stroke-dasharray="28 28"
               />
             </svg>
-            <span>{{ creatingUser ? "Creating..." : "Create Operator" }}</span>
+            <span>{{ creatingUser ? $t("users.creating") : $t("users.createOperator") }}</span>
           </button>
         </div>
 
@@ -236,7 +236,7 @@
                 stroke-linecap="round"
               />
             </svg>
-            Operator created successfully
+            {{ $t("users.operatorCreated") }}
           </div>
         </transition>
       </form>
@@ -269,7 +269,7 @@
         <input
           type="text"
           v-model="filters.search"
-          placeholder="Search by name or email..."
+          :placeholder="$t('users.searchPlaceholder')"
           class="search-input"
         />
         <button
@@ -285,7 +285,7 @@
         <!-- Role Filter -->
         <div class="filter-dropdown">
           <button class="filter-btn" @click="toggleFilter('role')">
-            <span>Role</span>
+            <span>{{ $t("users.role") }}</span>
             <span class="filter-badge" v-if="filters.role.length">{{
               filters.role.length
             }}</span>
@@ -306,12 +306,12 @@
           <div v-if="openFilter === 'role'" class="filter-menu">
             <label class="filter-option">
               <input type="checkbox" value="admin" v-model="filters.role" />
-              <span class="filter-option-label">Admin</span>
+              <span class="filter-option-label">{{ $t("users.admin") }}</span>
               <span class="filter-option-count">{{ usersByRole.admin }}</span>
             </label>
             <label class="filter-option">
               <input type="checkbox" value="user" v-model="filters.role" />
-              <span class="filter-option-label">Operator</span>
+              <span class="filter-option-label">{{ $t("users.operator") }}</span>
               <span class="filter-option-count">{{ usersByRole.user }}</span>
             </label>
           </div>
@@ -320,7 +320,7 @@
         <!-- Gender Filter -->
         <div class="filter-dropdown">
           <button class="filter-btn" @click="toggleFilter('gender')">
-            <span>Gender</span>
+            <span>{{ $t("users.gender") }}</span>
             <span class="filter-badge" v-if="filters.gender.length">{{
               filters.gender.length
             }}</span>
@@ -341,12 +341,12 @@
           <div v-if="openFilter === 'gender'" class="filter-menu">
             <label class="filter-option">
               <input type="checkbox" value="male" v-model="filters.gender" />
-              <span class="filter-option-label">Male</span>
+              <span class="filter-option-label">{{ $t("users.male") }}</span>
               <span class="filter-option-count">{{ usersByGender.male }}</span>
             </label>
             <label class="filter-option">
               <input type="checkbox" value="female" v-model="filters.gender" />
-              <span class="filter-option-label">Female</span>
+              <span class="filter-option-label">{{ $t("users.female") }}</span>
               <span class="filter-option-count">{{
                 usersByGender.female
               }}</span>
@@ -357,7 +357,7 @@
         <!-- Rating Filter -->
         <div class="filter-dropdown">
           <button class="filter-btn" @click="toggleFilter('rating')">
-            <span>Min Rating</span>
+            <span>{{ $t("users.minRating") }}</span>
             <span class="filter-badge" v-if="filters.minRating > 0"
               >{{ filters.minRating }}+ ★</span
             >
@@ -399,7 +399,7 @@
               </div>
             </div>
             <button class="filter-clear" @click="filters.minRating = 0">
-              Clear
+              {{ $t("users.clear") }}
             </button>
           </div>
         </div>
@@ -407,7 +407,7 @@
         <!-- Active Filters -->
         <div v-if="hasActiveFilters" class="active-filters">
           <button class="clear-filters" @click="clearAllFilters">
-            Clear all
+            {{ $t("users.clearAll") }}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
                 d="M1 1L13 13M13 1L1 13"
@@ -424,15 +424,15 @@
     <div class="users-section">
       <div class="users-header">
         <h3 class="users-title">
-          All Operators
+          {{ $t("users.allOperators") }}
           <span class="users-count">{{ filteredUsers.length }}</span>
         </h3>
         <div class="sort-dropdown">
           <select v-model="sortBy" class="sort-select">
-            <option value="email">Sort by Email</option>
-            <option value="name">Sort by Name</option>
-            <option value="role">Sort by Role</option>
-            <option value="rating">Sort by Rating</option>
+            <option value="email">{{ $t("users.sortByEmail") }}</option>
+            <option value="name">{{ $t("users.sortByName") }}</option>
+            <option value="role">{{ $t("users.sortByRole") }}</option>
+            <option value="rating">{{ $t("users.sortByRating") }}</option>
           </select>
         </div>
       </div>
@@ -440,7 +440,7 @@
       <!-- Loading State -->
       <div v-if="loadingUsers" class="loading-state">
         <div class="loading-spinner"></div>
-        <p>Loading operators...</p>
+        <p>{{ $t("users.loadingOperators") }}</p>
       </div>
 
       <!-- Empty State -->
@@ -461,8 +461,8 @@
             stroke-linecap="round"
           />
         </svg>
-        <h4>No operators found</h4>
-        <p>Try adjusting your filters or create a new operator</p>
+        <h4>{{ $t("users.noOperatorsFound") }}</h4>
+        <p>{{ $t("users.adjustFilters") }}</p>
       </div>
 
       <!-- Users Grid -->
@@ -481,7 +481,7 @@
               />
               <div class="user-badges">
                 <span class="role-badge" :class="user.role">
-                  {{ user.role === "admin" ? "Admin" : "Operator" }}
+                  {{ user.role === "admin" ? $t("users.admin") : $t("users.operator") }}
                 </span>
                 <span class="gender-badge" :class="user.gender">
                   {{ user.gender }}
@@ -490,7 +490,7 @@
             </div>
 
             <div class="user-card-body">
-              <h4 class="user-name">{{ user.name || "No name set" }}</h4>
+              <h4 class="user-name">{{ user.name || $t("users.noNameSet") }}</h4>
               <p class="user-email">{{ user.email }}</p>
 
               <!-- Rating Display -->
@@ -512,11 +512,11 @@
               <!-- Performance Metrics -->
               <div class="user-metrics" v-if="user.role != 'admin'">
                 <div class="metric">
-                  <span class="metric-label">Chats</span>
+                  <span class="metric-label">{{ $t("users.chats") }}</span>
                   <span class="metric-value">{{ user.totalChats || 0 }}</span>
                 </div>
                 <div class="metric">
-                  <span class="metric-label">Avg Response</span>
+                  <span class="metric-label">{{ $t("users.avgResponse") }}</span>
                   <span class="metric-value">{{
                     user.avgResponseTime || "—"
                   }}</span>
@@ -529,7 +529,7 @@
                 class="view-profile-btn"
                 @click="viewUserProfile(user.id)"
               >
-                View Profile
+                {{ $t("users.viewProfile") }}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
                     d="M6 12L10 8L6 4"
@@ -692,7 +692,7 @@ export default {
 
       try {
         if (!this.newUser.email || !this.newUser.password) {
-          this.createError = "Email and password are required.";
+          this.createError = this.$t("users.emailPasswordRequired");
           return;
         }
 
@@ -714,9 +714,9 @@ export default {
         }, 3000);
       } catch (err) {
         if (err.payload?.error === "email_already_exists") {
-          this.createError = "Email already exists.";
+          this.createError = this.$t("users.emailExists");
         } else {
-          this.createError = "Failed to create user.";
+          this.createError = this.$t("users.createFailed");
         }
       } finally {
         this.creatingUser = false;
